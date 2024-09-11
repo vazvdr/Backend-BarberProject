@@ -1,6 +1,6 @@
 package com.barber_project.backend_barber.config;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,11 @@ import org.springframework.context.annotation.Profile;
 import com.barber_project.backend_barber.entities.Agendamento;
 import com.barber_project.backend_barber.entities.Profissional;
 import com.barber_project.backend_barber.entities.Servico;
+import com.barber_project.backend_barber.entities.Usuario;
 import com.barber_project.backend_barber.repositories.AgendamentoRepository;
 import com.barber_project.backend_barber.repositories.ProfissionalRepository;
 import com.barber_project.backend_barber.repositories.ServicoRepository;
+import com.barber_project.backend_barber.repositories.UsuarioRepository;
 
 @Configuration
 @Profile("test")
@@ -24,6 +26,12 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ServicoRepository servicoRepository;
+	
+	@Autowired
+	private AgendamentoRepository agendamentoRepository;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	
 	@Override
@@ -46,5 +54,10 @@ public class TestConfig implements CommandLineRunner{
 		Servico serv6 = new Servico(null, "Noivo Raiz", "Prepare-se para o grande dia com um tratamento digno de um verdadeiro guerreiro da estrada. Corte de cabelo afiado, barba de lenhador e manicure de motoqueiro, tudo enquanto você relaxa ao som de rock pesado.", 180, 3, "");
 	
 		servicoRepository.saveAll(Arrays.asList(serv1,serv2,serv3,serv4,serv5,serv6));
+		
+		Usuario user1 = new Usuario(null, "vanderson@teste.com", "Vanderson", "123456", "9645612");
+		usuarioRepository.saveAll(Arrays.asList(user1));
+		
+		
 	}
 }

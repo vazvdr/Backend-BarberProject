@@ -35,8 +35,7 @@ public class UsuarioService {
 	public Usuario update(Long id, Usuario obj) {
 		Usuario entity = repository.getReferenceById(id);
 		updateData(entity, obj);
-		return repository.save(entity);
-		
+		return repository.save(entity);		
 	}
 
 	private void updateData(Usuario entity, Usuario obj) {

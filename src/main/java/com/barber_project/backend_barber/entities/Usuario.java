@@ -1,16 +1,16 @@
 package com.barber_project.backend_barber.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -20,21 +20,22 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nomeCliente;
-	private String email;
-	private String senha;
-	private String telefone;
+	private String nome;
+    private String email;
+    private String senha;
+    private String telefone;
+    private Boolean barbeiro = false;
 	
-	@Transient
-	private Set<Profissional> meusAgendamentos = new HashSet<>();
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Agendamento> agendamentos;
 	
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nomeCliente, String email, String senha, String telefone) {
+	public Usuario(Long id, String nome, String email, String senha, String telefone) {
 		super();
 		this.id = id;
-		this.nomeCliente = nomeCliente;
+		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.telefone = telefone;
@@ -48,12 +49,12 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeCliente() {
-		return nomeCliente;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -83,10 +84,7 @@ public class Usuario implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	public Set<Profissional> getMeusAgendamentos() {
-		return meusAgendamentos;
-	}
+
 
 	@Override
 	public int hashCode() {

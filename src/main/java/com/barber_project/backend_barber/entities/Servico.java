@@ -1,12 +1,15 @@
 package com.barber_project.backend_barber.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,11 +20,17 @@ public class Servico implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(unique = true)
 	private String nome;
+	
 	private String descricao;
 	private Integer preco;
 	private Integer qtdSlots;
 	private String imagemURL;
+	
+	@ManyToMany(mappedBy = "servicos")
+    private List<Agendamento> agendamentos;
 	
 	public Servico() {
 	}

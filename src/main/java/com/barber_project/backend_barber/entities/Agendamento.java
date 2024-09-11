@@ -1,14 +1,18 @@
 package com.barber_project.backend_barber.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -20,25 +24,40 @@ public class Agendamento implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Instant data;
-	private Integer profissionalId;
-	private String servico;
-	private String usuario;
-	private Integer usuarioId;
+
+	@Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private LocalDateTime data;
 	
+	@ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
+	
+	@ManyToOne
+    @JoinColumn(insertable=false, updatable=false)
+    private Profissional profissional;
+	
+	@ManyToMany
+    @JoinTable(
+        name = "agendamento_servico",
+        joinColumns = @JoinColumn(name = "agendamento_id"),
+        inverseJoinColumns = @JoinColumn(name = "servico_id")
+    )
+    private List<Servico> servicos;
+	
+	private Servico servico;
 	
 	public Agendamento() {
 	}
 
-	public Agendamento(Long id, Instant data, Integer profissionalId, String servico, String usuario,
-			Integer usuarioId) {
+	public Agendamento(Long id, LocalDateTime data, Usuario usuario, Profissional profissional, List<Servico> servicos,
+			Servico servico) {
 		super();
 		this.id = id;
 		this.data = data;
-		this.profissionalId = profissionalId;
-		this.servico = servico;
 		this.usuario = usuario;
-		this.usuarioId = usuarioId;
+		this.profissional = profissional;
+		this.servicos = servicos;
+		this.servico = servico;
 	}
 
 	public Long getId() {
@@ -49,44 +68,44 @@ public class Agendamento implements Serializable {
 		this.id = id;
 	}
 
-	public Instant getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(Instant data) {
+	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 
-	public Integer getProfissionalId() {
-		return profissionalId;
-	}
-
-	public void setProfissionalId(Integer profissionalId) {
-		this.profissionalId = profissionalId;
-	}
-
-	public String getServico() {
-		return servico;
-	}
-
-	public void setServico(String servico) {
-		this.servico = servico;
-	}
-
-	public String getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(String usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public Integer getUsuarioId() {
-		return usuarioId;
+	public Profissional getProfissional() {
+		return profissional;
 	}
 
-	public void setUsuarioId(Integer usuarioId) {
-		this.usuarioId = usuarioId;
+	public void setProfissional(Profissional profissional) {
+		this.profissional = profissional;
+	}
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
+
+	public Servico getServico() {
+		return servico;
+	}
+
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 
 	public static long getSerialversionuid() {
@@ -95,7 +114,7 @@ public class Agendamento implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(data, profissionalId, servico, usuarioId);
+		return Objects.hash(data, servico);
 	}
 
 	@Override
@@ -107,8 +126,10 @@ public class Agendamento implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Agendamento other = (Agendamento) obj;
-		return Objects.equals(data, other.data) && Objects.equals(profissionalId, other.profissionalId)
-				&& Objects.equals(servico, other.servico) && Objects.equals(usuarioId, other.usuarioId);
+		return Objects.equals(data, other.data)
+				&& Objects.equals(servico, other.servico);
 	}
+
+	
 
 }

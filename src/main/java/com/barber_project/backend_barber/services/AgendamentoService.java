@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.barber_project.backend_barber.entities.Agendamento;
-import com.barber_project.backend_barber.entities.Usuario;
 import com.barber_project.backend_barber.repositories.AgendamentoRepository;
 
 @Service
@@ -41,7 +40,7 @@ public class AgendamentoService {
 
 	private void updateData(Agendamento entity, Agendamento obj) {
 		entity.setData(obj.getData());
-		entity.setProfissionalId(obj.getProfissionalId());
+		entity.setProfissional(obj.getProfissional());
 		entity.setServico(obj.getServico());
 	}
 
