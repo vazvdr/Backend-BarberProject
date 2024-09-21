@@ -1,6 +1,5 @@
 package com.barber_project.backend_barber.config;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.barber_project.backend_barber.entities.Agendamento;
 import com.barber_project.backend_barber.entities.Profissional;
 import com.barber_project.backend_barber.entities.Servico;
 import com.barber_project.backend_barber.entities.Usuario;
-import com.barber_project.backend_barber.repositories.AgendamentoRepository;
 import com.barber_project.backend_barber.repositories.ProfissionalRepository;
 import com.barber_project.backend_barber.repositories.ServicoRepository;
 import com.barber_project.backend_barber.repositories.UsuarioRepository;
@@ -26,9 +23,6 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ServicoRepository servicoRepository;
-	
-	@Autowired
-	private AgendamentoRepository agendamentoRepository;
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -55,9 +49,8 @@ public class TestConfig implements CommandLineRunner{
 	
 		servicoRepository.saveAll(Arrays.asList(serv1,serv2,serv3,serv4,serv5,serv6));
 		
-		Usuario user1 = new Usuario(null, "vanderson@teste.com", "Vanderson", "123456", "9645612");
+		Usuario user1 = new Usuario(null, "Vanderson", "vanderson@teste.com", "123456", "9645612");
 		usuarioRepository.saveAll(Arrays.asList(user1));
-		
 		
 	}
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barber_project.backend_barber.entities.Servico;
-import com.barber_project.backend_barber.entities.Usuario;
 import com.barber_project.backend_barber.services.ServicoService;
 
 @RestController

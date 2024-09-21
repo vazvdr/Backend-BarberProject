@@ -29,7 +29,7 @@ public class Servico implements Serializable {
 	private Integer qtdSlots;
 	private String imagemURL;
 	
-	@ManyToMany(mappedBy = "servicos")
+	@ManyToMany(mappedBy = "servico")
     private List<Agendamento> agendamentos;
 	
 	public Servico() {

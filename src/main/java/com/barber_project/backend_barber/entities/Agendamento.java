@@ -1,9 +1,7 @@
 package com.barber_project.backend_barber.entities;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
+import java.time.Instant;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,121 +13,78 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "tb_agendamento")
-public class Agendamento implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+@Table(name = "tb_agendamentos",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"data", "profissionalId"})
+    }
+)
+public class Agendamento {
 
-	@Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    private LocalDateTime data;
-	
-	@ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(nullable = false)
+    private Instant data;
+
+    @ManyToOne
+    @JoinColumn(name = "usuarioId", nullable = false)
     private Usuario usuario;
-	
-	@ManyToOne
-    @JoinColumn(insertable=false, updatable=false)
+
+    @ManyToOne
+    @JoinColumn(name = "profissionalId", nullable = false)
     private Profissional profissional;
-	
-	@ManyToMany
+
+    @ManyToMany
     @JoinTable(
         name = "agendamento_servico",
-        joinColumns = @JoinColumn(name = "agendamento_id"),
-        inverseJoinColumns = @JoinColumn(name = "servico_id")
+        joinColumns = @JoinColumn(name = "agendamentoId"),
+        inverseJoinColumns = @JoinColumn(name = "servicoId")
     )
-    private List<Servico> servicos;
-	
-	private Servico servico;
-	
-	public Agendamento() {
-	}
+    private Set<Servico> servico;
 
-	public Agendamento(Long id, LocalDateTime data, Usuario usuario, Profissional profissional, List<Servico> servicos,
-			Servico servico) {
-		super();
-		this.id = id;
-		this.data = data;
-		this.usuario = usuario;
-		this.profissional = profissional;
-		this.servicos = servicos;
-		this.servico = servico;
-	}
+    // Getters e Setters
+    public Long getId() {
+        return id;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Instant getData() {
+        return data;
+    }
 
-	public LocalDateTime getData() {
-		return data;
-	}
+    public void setData(Instant data) {
+        this.data = data;
+    }
 
-	public void setData(LocalDateTime data) {
-		this.data = data;
-	}
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+    public Profissional getProfissional() {
+        return profissional;
+    }
 
-	public Profissional getProfissional() {
-		return profissional;
-	}
+    public void setProfissional(Profissional profissional) {
+        this.profissional = profissional;
+    }
 
-	public void setProfissional(Profissional profissional) {
-		this.profissional = profissional;
-	}
+    public Set<Servico> getServicos() {
+        return servico;
+    }
 
-	public List<Servico> getServicos() {
-		return servicos;
-	}
-
-	public void setServicos(List<Servico> servicos) {
-		this.servicos = servicos;
-	}
-
-	public Servico getServico() {
-		return servico;
-	}
-
-	public void setServico(Servico servico) {
-		this.servico = servico;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(data, servico);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Agendamento other = (Agendamento) obj;
-		return Objects.equals(data, other.data)
-				&& Objects.equals(servico, other.servico);
-	}
-
-	
-
+    public void setServicos(Set<Servico> servico) {
+        this.servico = servico;
+    }
 }
+

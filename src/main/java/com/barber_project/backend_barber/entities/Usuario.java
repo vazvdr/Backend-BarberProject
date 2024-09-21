@@ -2,7 +2,6 @@ package com.barber_project.backend_barber.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -11,9 +10,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "tb_usuario")
+@Table(name = "tb_usuario", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"email"})
+    })
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,7 +26,6 @@ public class Usuario implements Serializable {
     private String email;
     private String senha;
     private String telefone;
-    private Boolean barbeiro = false;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Agendamento> agendamentos;
@@ -80,27 +81,6 @@ public class Usuario implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(email);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(email, other.email);
-	}	
+	
 
 }

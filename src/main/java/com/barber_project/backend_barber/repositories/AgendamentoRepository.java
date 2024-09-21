@@ -6,4 +6,5 @@ import com.barber_project.backend_barber.entities.Agendamento;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
 
+
 }
