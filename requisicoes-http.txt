@@ -1,0 +1,14 @@
+Body para cadastrar um usuário novo
+{
+    "nome": "Vanderson",
+    "email": "vanderson@hotmail.com",
+    "senha": "123456",
+    "telefone": "965762344"
+}
+Body para fazer um agendamento
+{
+    "data": "2024-09-22T15:00:00Z",
+    "usuarioId": 1,
+    "profissionalId": 2,
+    "servicoIds": [1, 3]
+}
