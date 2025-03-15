@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Outras mudanças de banco de dados aqui, se necessário -->
+
+    <!-- Adicionando migração de dados -->
+    <changeSet author="seu_nome" id="1" runOnChange="true">
+        <sql>
+            <![CDATA[
+            INSERT INTO tb_profissional (nome, descricao, imagem_url, qtd_avaliacoes, avaliacao) VALUES
+            ('Marcão Machadada', 'Salve, salve, galera! Sou o Marcão Machadada, o único cabeleireiro que pode transformar uma juba de leão em um corte digno de um rei com um único movimento de tesoura.', '', 5, 87),
+            ('Beto Brutal', 'Quando o assunto é barba, ninguém faz melhor que Beto Brutal! Suas lâminas afiadas são lendárias e seu estilo é inconfundível. Para um visual marcante e robusto, ele é o seu homem!', '', 5, 87),
+            ('Kathya Tesourada', 'Kathya não tem medo de tesourar! Com precisão e ousadia, ela transforma qualquer cabelo em uma obra-prima rústica. Seu lema? Corte raiz sem perder a feminilidade!', '', 5, 87),
+            ('Sérgio Serrador', 'Sérgio é conhecido por sua técnica impecável e estilo único. Com sua serra (ou melhor, tesoura) em mãos, ele cria visuais que impressionam. Barba bem-feita é com ele mesmo!', '', 5, 87),
+            ('Rafa Raspa Tudo', 'TPara aqueles que preferem um look mais rente, Rafa é o especialista! Sua máquina raspa tudo com precisão, deixando um acabamento perfeito. Raspar é a sua arte!', '', 5, 87),
+            ('Fernanda Faísca', 'Fernanda traz um toque de brilho e energia a cada corte. Com suas lâminas ágeis, ela faz milagres em qualquer tipo de cabelo. Precisa de um look cheio de faísca? É com ela mesmo!', '', 5, 87);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet author="seu_nome" id="2" runOnChange="true">
+        <sql>
+            <![CDATA[
+            INSERT INTO tb_servico (nome, descricao, preco, qtd_slots, imagemurl) VALUES
+            ('Corte Viking', 'Venha receber um corte de Viking, com lâmina na pele e estilo de guerreiro. Saia pronto para enfrentar qualquer batalha com um visual que impõe respeito.', 55, 3, ''),
+            ('Barba Lenhador', 'Venha dar um trato na sua barba de lenhador, com aparo preciso e estilo de macho raiz. Saia com uma barba que impõe respeito e faz tremer até as árvores.', 45, 3, ''),
+            ('Garras Brutais', 'Venha transformar suas patas de urso em garras de lobo. Nosso serviço de Manicure & Pedicure para homens é tão bruto quanto você, mas com um toque de classe.', 40, 3, ''),
+            ('Combo Alpha', 'Nosso combo Alpha inclui um corte de cabelo de Viking, uma barba de lenhador e manicure & pedicure de gladiador. Saia pronto para enfrentar qualquer batalha com estilo e unhas afiadas.', 95, 3, ''),
+            ('Pequeno Caçador', 'Transforme seu pequeno aventureiro em um mini caçador, com um corte cheio de atitude e estilo. Cabelo afiado como uma guitarra e maneiro como uma Harley.', 60, 3, ''),
+            ('Noivo Raiz', 'Prepare-se para o grande dia com um tratamento digno de um verdadeiro guerreiro da estrada. Corte de cabelo afiado, barba de lenhador e manicure de motoqueiro, tudo enquanto você relaxa ao som de rock pesado.', 180, 3, '');
+            ]]>
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

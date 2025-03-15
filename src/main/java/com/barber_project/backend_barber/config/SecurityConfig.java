@@ -15,7 +15,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // Desativa CSRF (útil para APIs REST)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/usuarios/**").permitAll() // Permite acesso aos endpoints de usuários
+                .requestMatchers("/profissionais/**","/servicos/**","/usuarios/**").permitAll() // Permite acesso aos endpoints de usuários
                 .anyRequest().authenticated() // Exige autenticação para outros endpoints
             );
 
