@@ -26,6 +26,7 @@ public class Usuario implements Serializable {
     private String email;
     private String senha;
     private String telefone;
+    private boolean barbeiro;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Agendamento> agendamentos;
@@ -33,13 +34,14 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nome, String email, String senha, String telefone) {
+	public Usuario(Long id, String nome, String email, String senha, String telefone, boolean barbeiro) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.telefone = telefone;
+		this.barbeiro = barbeiro;
 	}
 
 	public Long getId() {
@@ -80,6 +82,14 @@ public class Usuario implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public boolean isBarbeiro() {
+		return barbeiro;
+	}
+
+	public void setBarbeiro(boolean barbeiro) {
+		this.barbeiro = barbeiro;
 	}
 	
 

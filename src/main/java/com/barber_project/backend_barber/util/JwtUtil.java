@@ -32,12 +32,10 @@ public class JwtUtil {
                 .getBody();
     }
 
-    // Verifica se o token está expirado
     public static boolean isTokenExpired(String token) {
         return validateToken(token).getExpiration().before(new Date());
     }
 
-    // Recupera o sujeito (subject) do token
     public static String extractSubject(String token) {
         return validateToken(token).getSubject();
     }

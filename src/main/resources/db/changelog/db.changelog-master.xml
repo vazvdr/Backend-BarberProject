@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <!-- Outras mudanças de banco de dados aqui, se necessário -->
+	<!-- Outras mudanças de banco de dados aqui, se necessário -->
 
-    <!-- Adicionando migração de dados -->
-    <changeSet author="seu_nome" id="1" runOnChange="true">
-        <sql>
+	<!-- Adicionando migração de dados -->
+	<changeSet author="seu_nome" id="1" runOnChange="true">
+		<sql>
             <![CDATA[
             INSERT INTO tb_profissional (nome, descricao, imagem_url, qtd_avaliacoes, avaliacao) VALUES
             ('Marcão Machadada', 'Salve, salve, galera! Sou o Marcão Machadada, o único cabeleireiro que pode transformar uma juba de leão em um corte digno de um rei com um único movimento de tesoura.', '', 5, 87),
@@ -21,10 +20,10 @@
             ('Fernanda Faísca', 'Fernanda traz um toque de brilho e energia a cada corte. Com suas lâminas ágeis, ela faz milagres em qualquer tipo de cabelo. Precisa de um look cheio de faísca? É com ela mesmo!', '', 5, 87);
             ]]>
         </sql>
-    </changeSet>
+	</changeSet>
 
-    <changeSet author="seu_nome" id="2" runOnChange="true">
-        <sql>
+	<changeSet author="seu_nome" id="2" runOnChange="true">
+		<sql>
             <![CDATA[
             INSERT INTO tb_servico (nome, descricao, preco, qtd_slots, imagemurl) VALUES
             ('Corte Viking', 'Venha receber um corte de Viking, com lâmina na pele e estilo de guerreiro. Saia pronto para enfrentar qualquer batalha com um visual que impõe respeito.', 55, 3, ''),
@@ -35,6 +34,12 @@
             ('Noivo Raiz', 'Prepare-se para o grande dia com um tratamento digno de um verdadeiro guerreiro da estrada. Corte de cabelo afiado, barba de lenhador e manicure de motoqueiro, tudo enquanto você relaxa ao som de rock pesado.', 180, 3, '');
             ]]>
         </sql>
-    </changeSet>
+	</changeSet>
+	<changeSet id="001-add-column-barbeiro" author="seu-nome">
+    <sql>
+        ALTER TABLE tb_usuario ADD COLUMN barbeiro BOOLEAN DEFAULT false NOT NULL;
+    </sql>
+</changeSet>
+
 
 </databaseChangeLog>

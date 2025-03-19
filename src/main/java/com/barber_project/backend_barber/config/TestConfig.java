@@ -49,7 +49,7 @@ public class TestConfig implements CommandLineRunner{
 	
 		servicoRepository.saveAll(Arrays.asList(serv1,serv2,serv3,serv4,serv5,serv6));
 		
-		Usuario user1 = new Usuario(null, "Vanderson", "vanderson@teste.com", "123456", "9645612");
+		Usuario user1 = new Usuario(null, "Vanderson", "vanderson@teste.com", "123456", "9645612", false);
 		usuarioRepository.saveAll(Arrays.asList(user1));
 		
 	}
